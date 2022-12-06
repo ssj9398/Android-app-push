@@ -1,0 +1,4 @@
+fcm:
+  key:
+    path: fcm.json
+    scope: https://www.googleapis.com/auth/cloud-platform
