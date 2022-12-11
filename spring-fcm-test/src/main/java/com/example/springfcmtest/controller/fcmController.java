@@ -19,8 +19,6 @@ import java.util.Arrays;
 @RestController
 @RequiredArgsConstructor
 public class fcmController {
-    @Value("${fcm.key.path}")
-    private String path;
 
     @GetMapping("test")
     public void test(){
@@ -33,9 +31,8 @@ public class fcmController {
         try {
             String MESSAGING_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
             String[] SCOPES = { MESSAGING_SCOPE };
-            System.out.println(path);
             GoogleCredential googleCredential = GoogleCredential
-                    .fromStream(new FileInputStream("src/main/resources/fcm.json"))
+                    .fromStream(new FileInputStream("src/main/resources/my-application-15d99-firebase-adminsdk-ycsvs-45de0fa5fe.json"))
                     .createScoped(Arrays.asList(SCOPES));
             googleCredential.refreshToken();
 
@@ -44,20 +41,20 @@ public class fcmController {
             headers.add("Authorization", "Bearer " + googleCredential.getAccessToken());
 
             JSONObject notification = new JSONObject();
-            notification.put("body", "TEST");
-            notification.put("title", "TEST");
+            notification.put("body", "내용 테스트");
+            notification.put("title", "제목 테스트");
 
             JSONObject message = new JSONObject();
-            message.put("token", "fa_qIyte8d4:APA91bHOGnZulT059PyK3z_sb1dIkDXTiZUIuRksmS7TdK6XgXAS5kopeGIwUfyhad3X3iXMNknCUOZaF6_mgoj1ohG10CanRyJ_EW1d3xN2E-1DPiLdbMK4pdOgdhB1ztZClqB-25rC");
+            message.put("token", "eqM-7-G4QC-I5vQhmOQ4e7:APA91bFL-nljKcBFfDzpTPoLuPrBLRIT5iZZCY8EedHQoUJCnyaqEW3xFPx4AzlwF5gu7OXVIMsP9saTaVXGbuHnp_L0KVb-IqSxJo8i_7XvlWkKp5f3HMYi9PVFrbYVCccVraOPaQfj");
             message.put("notification", notification);
 
             JSONObject jsonParams = new JSONObject();
             jsonParams.put("message", message);
 
-            HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonParams, headers);
+            HttpEntity<JSONObject> httpEntity = new HttpEntity<>(jsonParams, headers);
             RestTemplate rt = new RestTemplate();
 
-            ResponseEntity<String> res = rt.exchange("https://fcm.googleapis.com/v1/projects/arton-316d0/messages:send"
+            ResponseEntity<String> res = rt.exchange("https://fcm.googleapis.com/v1/projects/my-application-15d99/messages:send"
                     , HttpMethod.POST
                     , httpEntity
                     , String.class);
@@ -66,7 +63,7 @@ public class fcmController {
                 log.debug("FCM-Exception");
                 log.debug(res.getStatusCode().toString());
                 log.debug(res.getHeaders().toString());
-                log.debug(res.getBody().toString());
+                log.debug(res.getBody());
 
             } else {
                 log.debug(res.getStatusCode().toString());
