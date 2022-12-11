@@ -1,4 +1,4 @@
-package com.kbmobile.fcm_android;
+package com.firebase.fcm_android;
 
 import org.junit.Test;
 

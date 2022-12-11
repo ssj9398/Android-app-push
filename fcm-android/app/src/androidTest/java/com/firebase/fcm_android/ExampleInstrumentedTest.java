@@ -1,4 +1,4 @@
-package com.kbmobile.fcm_android;
+package com.firebase.fcm_android;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -20,6 +20,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.kbmobile.fcm_android", appContext.getPackageName());
+        assertEquals("com.firebase.fcm_android", appContext.getPackageName());
     }
 }

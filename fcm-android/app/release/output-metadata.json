@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.kbmobile.fcm_android",
+  "applicationId": "com.firebase.fcm_android",
   "variantName": "release",
   "elements": [
     {
